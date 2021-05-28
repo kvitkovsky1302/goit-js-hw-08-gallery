@@ -9,7 +9,7 @@ const refs = {
 }
 
 const createGallery = galleryItems.map(({ preview, description, original }) => {
-    return `<li><a><img src="${preview}" alt="${description}" data-source="${original}"></a></li>`
+    return `<li><a href="${original}"><img src="${preview}" alt="${description}" data-source="${original}"></a></li>`
 }).join('');
 
 refs.listGallery.insertAdjacentHTML('afterbegin', createGallery);
@@ -24,6 +24,7 @@ function onClickImageGallery(event) {
     refs.lightBoxGallery.classList.add('is-open');
     refs.lightBoxImage.src = event.target.dataset.source;
     refs.lightBoxImage.alt = event.target.alt;
+    event.preventDefault();
 };
 
 function onCloseLightBox() {
