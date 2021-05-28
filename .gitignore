@@ -1,3 +1,9 @@
+# Папки и файлы которые git должен игнорировать
+.vscode
+.idea
+.DS_Store
+*.psd
+
 # Logs
 logs
 *.log
