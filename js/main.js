@@ -30,8 +30,8 @@ function onOpenLightBox(event) {
     refs.lightBoxImage.src = event.target.dataset.source;
     refs.lightBoxImage.alt = event.target.alt;
     window.addEventListener('keydown', onPressEsc);
-    window.addEventListener('keydown', onThroughtRight);
-    window.addEventListener('keydown', onThroughtLeft);
+    window.addEventListener('keydown', onThroughRight);
+    window.addEventListener('keydown', onThroughLeft);
     refs.lightBoxOverlay.addEventListener('click', onCloseLightBox);
 };
 
@@ -41,7 +41,7 @@ function onPressEsc(event) {
     }
 };
 
-function onThroughtRight(event) {
+function onThroughRight(event) {
     if (event.code === 'ArrowRight') {
         let indexOfImage = listOfImagesSrc.indexOf(refs.lightBoxImage.src);
         if (indexOfImage === listOfImagesSrc.length - 1) {
@@ -52,7 +52,7 @@ function onThroughtRight(event) {
     }
 };
 
-function onThroughtLeft(event) {
+function onThroughLeft(event) {
     if (event.code === 'ArrowLeft') {
         let indexOfImage = listOfImagesSrc.indexOf(refs.lightBoxImage.src);
         if (indexOfImage === 0) {
@@ -68,7 +68,7 @@ function onCloseLightBox() {
     refs.lightBoxImage.src = '';
     refs.lightBoxImage.alt = '';
     window.removeEventListener('keydown', onPressEsc);
-    window.removeEventListener('keydown', onThroughtRight);
-    window.removeEventListener('keydown', onThroughtLeft);
+    window.removeEventListener('keydown', onThroughRight);
+    window.removeEventListener('keydown', onThroughLeft);
     refs.lightBoxOverlay.removeEventListener('click', onCloseLightBox);
 };
