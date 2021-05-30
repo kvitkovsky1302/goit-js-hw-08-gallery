@@ -19,6 +19,9 @@ refs.closeButton.addEventListener('click', onCloseLightBox);
 
 function onOpenLightBox(event) {
     event.preventDefault();
+    if (!event.target.classList.contains('gallery__image')) {
+        return;
+    };
     refs.lightBoxGallery.classList.add('is-open');
     refs.lightBoxImage.src = event.target.dataset.source;
     refs.lightBoxImage.alt = event.target.alt;
