@@ -9,20 +9,13 @@ const refs = {
 }
 
 const createGallery = galleryItems.map(({ preview, description, original }) => {
-    return `<li><a href="${original}"><img src="${preview}" alt="${description}" data-source="${original}"></a></li>`
+    return `<li class="gallery__item"><a href="${original}" class="gallery__link"><img class="gallery__image" src="${preview}" alt="${description}" data-source="${original}"></a></li>`
 }).join('');
 
 refs.listGallery.insertAdjacentHTML('afterbegin', createGallery);
-refs.listGallery.querySelectorAll('li').forEach(item => item.classList.add('gallery__item'));
-refs.listGallery.querySelectorAll('li a').forEach(item => item.classList.add('gallery__link'));
-refs.listGallery.querySelectorAll('li a img').forEach(item => item.classList.add('gallery__image'));
 
 refs.listGallery.addEventListener('click', onOpenLightBox);
 refs.closeButton.addEventListener('click', onCloseLightBox);
-
-const listOfImagesSrc = galleryItems.map(({ original }) => original);
-const listOfImagesDescription = galleryItems.map(({ description }) => description);
-
 
 function onOpenLightBox(event) {
     event.preventDefault();
@@ -43,23 +36,23 @@ function onPressEsc(event) {
 
 function onThroughRight(event) {
     if (event.code === 'ArrowRight') {
-        let indexOfImage = listOfImagesSrc.indexOf(refs.lightBoxImage.src);
-        if (indexOfImage === listOfImagesSrc.length - 1) {
+        let indexOfImage = galleryItems.findIndex(item => item.original === refs.lightBoxImage.src);
+        if (indexOfImage === galleryItems.length - 1) {
             indexOfImage = -1;
         }
-        refs.lightBoxImage.src = listOfImagesSrc[indexOfImage + 1];
-        refs.lightBoxImage.alt = listOfImagesDescription[indexOfImage + 1];
+        refs.lightBoxImage.src = galleryItems[indexOfImage + 1].original;
+        refs.lightBoxImage.alt = galleryItems[indexOfImage + 1].description;
     }
 };
 
 function onThroughLeft(event) {
     if (event.code === 'ArrowLeft') {
-        let indexOfImage = listOfImagesSrc.indexOf(refs.lightBoxImage.src);
+        let indexOfImage = galleryItems.findIndex(item => item.original === refs.lightBoxImage.src);
         if (indexOfImage === 0) {
-            indexOfImage = listOfImagesSrc.length;
+            indexOfImage = galleryItems.length;
         }
-        refs.lightBoxImage.src = listOfImagesSrc[indexOfImage - 1];
-        refs.lightBoxImage.alt = listOfImagesDescription[indexOfImage - 1];
+        refs.lightBoxImage.src = galleryItems[indexOfImage - 1].original;
+        refs.lightBoxImage.alt = galleryItems[indexOfImage - 1].description;
     }
 };
 
